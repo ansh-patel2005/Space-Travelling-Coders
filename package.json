@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "@babel/preset-react": "^7.25.7",
+    "@babel/preset-typescript": "^7.25.7",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "mocha": "^10.7.3",
+    "ts-loader": "^9.5.1"
+  },
+  "dependencies": {
+
+  },
+  "scripts": {
+    "test": "tsc && mocha './out/test/'"
+  }
+}
