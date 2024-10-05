@@ -1,7 +1,7 @@
 import assert from "assert"
 import { describe, it } from "node:test"
-import { changeToCartesian, changeToLongAndLat, changeToSpherical } from "../webpage/math"
-import { assetIsCloseEnough } from "./helper"
+import { changeToCartesian, changeToLongAndLat, changeToSpherical, normalizeVector, vectorDistance, vectorDotProduct } from "../webpage/math"
+import { assetIsCloseEnough as assertIsCloseEnough } from "./helper"
 
 function assertCoordinateEquality(actual: number[], expected: number[]) {
     const errMessage = `Got: [${actual.join(", ")}]. Expected: [${expected.join(", ")}]`
@@ -9,7 +9,7 @@ function assertCoordinateEquality(actual: number[], expected: number[]) {
     assert.equal(actual.length, expected.length, errMessage)
 
     for (let i = 0; i < actual.length; i++) {
-        assetIsCloseEnough(actual[i], expected[i], undefined, errMessage)
+        assertIsCloseEnough(actual[i], expected[i], undefined, errMessage)
     }
 }
 
@@ -70,6 +70,33 @@ describe("changeToSpherical", () => {
         assertCoordinateEquality(
             changeToSpherical(1, 0, 0),
             [1, 0, Math.PI/2]
+        )
+    })
+})
+
+describe("vectorDotProduct", () => {
+    it("general case", () => {
+        assert.deepEqual(
+            vectorDotProduct([1, 2, 3], [7, 5, 8]),
+            1*7 + 2*5 + 3*8
+        )
+    })
+})
+
+describe("normalizeVector", () => {
+    it("general case", () => {
+        assertCoordinateEquality(
+            normalizeVector([3, 4, 5]),
+            [0.424264069, 0.565685425, 0.707106781]
+        )
+    })
+})
+
+describe("vectorDistance", () => {
+    it("general case", () => {
+        assertIsCloseEnough(
+            vectorDistance([1, 2, 3], [-8, 4, 5]),
+            9.433981132
         )
     })
 })

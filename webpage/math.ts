@@ -1,3 +1,9 @@
+import { Coordinate } from "./types"
+
+function degToRad(deg: number) {
+    return deg/180 * Math.PI
+}
+
 /**
  * 
  * @param rightAsc 
@@ -34,10 +40,6 @@ export function changeToLongAndLat(rightAsc: string, declination: string): [numb
     let latitude = degrees
 
     return [degToRad(longitude), Math.PI/2 - degToRad(latitude)]
-}
-
-function degToRad(deg: number) {
-    return deg/180 * Math.PI
 }
 
 /**
@@ -80,27 +82,22 @@ export function changeToSpherical(x: number, y: number, z: number): [number, num
     return [distance, longitude, latitude]
 }
 
-function apparentSize(radiusStar: number, distanceFromPlanet: number): number{
-    return 2*Math.atan(radiusStar/distanceFromPlanet)
+/**
+ * Dot product of two vectors.
+ */
+export function vectorDotProduct(vec1: Coordinate, vec2: Coordinate) {
+    return vec1[0]*vec2[0] + vec1[1]*vec2[1] + vec1[2]*vec2[2]
 }
 
 /**
- * 
- * @param FOVSize // Note FOVSize must be > 0 (precondition).
- * @param apparentSize 
- * @param screenSize 
- * @returns 
+ * @param vec vector to normalize, must be nonzero.
+ * @returns copy of the vector normalized.
  */
-function starSizeOnScreen(FOVSize: number, apparentSize: number, screenSize: number){
-    return (apparentSize/FOVSize * screenSize)/2
+export function normalizeVector(vec: Coordinate) {
+    const vecMag = Math.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
+    return vec.map(item => item / vecMag) as Coordinate
 }
 
-/**
- * Return value is in terms of solar brightness so brightness of Sun from Earth = 1
- * @param stellarRadius // In solar radiuses
- * @param stellarTemperature // In degrees Kelvin
- * @param distancefromPlanet // In Astronomical Units (AU)
- */
-function celestialObjectBrightness(stellarRadius: number, stellarTemperature: number, distancefromPlanet: number){
-    return (stellarTemperature/5772 * stellarRadius)/distancefromPlanet**2
+export function vectorDistance(vec1: Coordinate, vec2: Coordinate) {
+    return Math.hypot(vec1[0] - vec2[0], vec1[1] - vec2[1], vec1[2] - vec2[2])
 }
