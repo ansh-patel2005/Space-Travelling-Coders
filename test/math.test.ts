@@ -1,6 +1,6 @@
 import assert from "assert"
 import { describe, it } from "node:test"
-import { changeToCartesian, changeToLongAndLat, changeToSpherical, normalizeVector, vectorDistance, vectorDotProduct } from "../webpage/math"
+import { changeToCartesian, changeToLongAndLat, changeToSpherical, normalizeVector, vectorDistance, vectorDotProduct, vectorCrossProduct } from "../webpage/math"
 import { assetIsCloseEnough as assertIsCloseEnough } from "./helper"
 
 function assertCoordinateEquality(actual: number[], expected: number[]) {
@@ -97,6 +97,21 @@ describe("vectorDistance", () => {
         assertIsCloseEnough(
             vectorDistance([1, 2, 3], [-8, 4, 5]),
             9.433981132
+        )
+    })
+})
+
+describe("crossProduct", () => {
+    it("general case", () => {
+        assertCoordinateEquality(
+            vectorCrossProduct([5, 3, 1], [1, 2, 3]),
+            [7, -14, 7]
+        )
+    })
+    it("edge case", () => {
+        assertCoordinateEquality(
+            vectorCrossProduct([1, 2, 3], [2, 4, 6]),
+            [0, 0, 0]
         )
     })
 })

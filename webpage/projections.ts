@@ -1,5 +1,5 @@
 import { Exoplanet, FOV, Coordinate } from "./types"
-import { changeToCartesian, changeToSpherical, normalizeVector, vectorDistance, vectorDotProduct } from "./math"
+import { changeToCartesian, changeToSpherical, normalizeVector, vectorCrossProduct, vectorDistance, vectorDotProduct } from "./math"
 import { stars } from "./internals"
 
 // This only works when you start on Earth
@@ -70,12 +70,20 @@ export function computeDisplayStars(fov: FOV, planetRadius: number) {
     }
 
     // For turning the plane into the screen.
-    let xBasis = changeToCartesian(planetRadius, fov.longitude + fov.fovReg / 2, fov.latitude)
-    let yBasis = changeToCartesian(planetRadius, fov.longitude, fov.latitude + fov.fovReg / 2)
-    
-    xBasis = normalizeVector(xBasis)
+    // Calculate the yBasis.
+    const fovCenter = changeToCartesian(planetRadius, fov.longitude, fov.latitude)
+    const yPosition = changeToCartesian(planetRadius, fov.longitude, fov.latitude + fov.fovReg / 2)
+
+    // "basis for y" as projected onto the plane.
+    let yBasis = plane.project([
+        yPosition[0] - fovCenter[0],
+        yPosition[1] - fovCenter[1],
+        yPosition[2] - fovCenter[2]
+    ])
     yBasis = normalizeVector(yBasis)
 
+    let xBasis = normalizeVector(vectorCrossProduct(plane.normal, yBasis))
+    
     // Project all the stars on the screen.
     for (const star of stars) {
         // Project the star onto the surface of the planet.

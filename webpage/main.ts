@@ -18,15 +18,16 @@ stars.push(new StarData(changeToCartesian(7.683e12, ...changeToLongAndLat(
     "06h01m21.0s", "+44d56m51.9s"
 ))))
 
-computeDisplayStars(fov, 6371)
+// kochab
+stars.push(new StarData(changeToCartesian(130.92*9.461e12, ...changeToLongAndLat(
+    "14h50m41.25s",
+    "74d03m33.5s"
+))))
 
-console.log(stars)
-console.log(FOVSize(fov, 6371))
+computeDisplayStars(fov, 6371)
 
 Animate()
 function Animate() {
-    requestAnimationFrame(Animate)
-
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 
@@ -48,4 +49,6 @@ function Animate() {
         ctx.arc(screenX, screenY, 5, 0, Math.PI*2)
         ctx.fill()
     }
+
+    requestAnimationFrame(() => {})
 }

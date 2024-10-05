@@ -101,3 +101,7 @@ export function normalizeVector(vec: Coordinate) {
 export function vectorDistance(vec1: Coordinate, vec2: Coordinate) {
     return Math.hypot(vec1[0] - vec2[0], vec1[1] - vec2[1], vec1[2] - vec2[2])
 }
+
+export function vectorCrossProduct(vec1: Coordinate, vec2: Coordinate): Coordinate {
+    return ([vec1[1]*vec2[2] - vec1[2]*vec2[1], vec1[2]*vec2[0] - vec1[0]*vec2[2], vec1[0]*vec2[1] - vec1[1]*vec2[0]])
+}
