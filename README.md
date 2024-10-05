@@ -6,8 +6,8 @@ Instal typescript? Maybe? https://www.typescriptlang.org/download/
 The rest will be installed when you run `npm i` in this directory.
 
 ## Compile Instructions
-`npm i`
+`npm i`\
 `npx webpack`
 
 Testing the code: 
-`node test` (creates an out folder)
+`npm run test` (creates an out folder)
