@@ -41,3 +41,33 @@ export function changeToCartesian(distanceFromEarth: number, longitude: number, 
     let z = distanceFromEarth*Math.cos(adjustedLongitude)
     return [x, y, z]
 }
+
+export function changeToSpherical(x: number, y: number, z: number): [number, number, number] {
+    if (x == 0 && y == 0 && z == 0){
+        return [0, 0, 0]
+    }
+    else if (x == 0 && y == 0 && z > 0){
+        return [z, 0, 90]
+    }
+    else if (x == 0 && y == 0 && z < 0){
+        return [-z, 0, -90]
+    }
+    else if (x == 0 && y > 0){
+        let distance = Math.sqrt(y**2 + z**2)
+        let longitude = Math.acos(z/Math.sqrt(y**2 + z**2))
+        let latitude = 90
+        return [distance, longitude, latitude]
+    }
+    else if (x == 0 && y < 0){
+        let distance = Math.sqrt(y**2 + z**2)
+        let longitude = Math.acos(z/Math.sqrt(y**2 + z**2))
+        let latitude = -90
+        return [distance, longitude, latitude]
+    }
+    else{
+        let distance = Math.sqrt(x**2 + y**2 + z**2)
+        let longitude = Math.acos(z/Math.sqrt(x**2 + y**2 + z**2))
+        let latitude = Math.atan(y/x)
+        return [distance, longitude, latitude]
+    }
+}
