@@ -102,5 +102,5 @@ function starSizeOnScreen(FOVSize: number, apparentSize: number, screenSize: num
  * @param distancefromPlanet // In Astronomical Units (AU)
  */
 function celestialObjectBrightness(stellarRadius: number, stellarTemperature: number, distancefromPlanet: number){
-    return stellarTemperature/5772 * distancefromPlanet**2 * stellarRadius
+    return (stellarTemperature/5772 * stellarRadius)/distancefromPlanet**2
 }
