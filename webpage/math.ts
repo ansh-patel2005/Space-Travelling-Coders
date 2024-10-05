@@ -94,3 +94,13 @@ function apparentSize(radiusStar: number, distanceFromPlanet: number): number{
 function starSizeOnScreen(FOVSize: number, apparentSize: number, screenSize: number){
     return (apparentSize/FOVSize * screenSize)/2
 }
+
+/**
+ * Return value is in terms of solar brightness so brightness of Sun from Earth = 1
+ * @param stellarRadius // In solar radiuses
+ * @param stellarTemperature // In degrees Kelvin
+ * @param distancefromPlanet // In Astronomical Units (AU)
+ */
+function celestialObjectBrightness(stellarRadius: number, stellarTemperature: number, distancefromPlanet: number){
+    return stellarTemperature/5772 * distancefromPlanet**2 * stellarRadius
+}
