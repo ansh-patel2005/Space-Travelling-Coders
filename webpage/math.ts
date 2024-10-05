@@ -79,3 +79,7 @@ export function changeToSpherical(x: number, y: number, z: number): [number, num
 
     return [distance, longitude, latitude]
 }
+
+function apparentSize(radiusStar: number, distanceFromPlanet: number): number{
+    return 2*Math.atan(radiusStar/distanceFromPlanet)
+}
