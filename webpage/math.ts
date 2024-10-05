@@ -83,3 +83,14 @@ export function changeToSpherical(x: number, y: number, z: number): [number, num
 function apparentSize(radiusStar: number, distanceFromPlanet: number): number{
     return 2*Math.atan(radiusStar/distanceFromPlanet)
 }
+
+/**
+ * 
+ * @param FOVSize // Note FOVSize must be > 0 (precondition).
+ * @param apparentSize 
+ * @param screenSize 
+ * @returns 
+ */
+function starSizeOnScreen(FOVSize: number, apparentSize: number, screenSize: number){
+    return (apparentSize/FOVSize * screenSize)/2
+}
