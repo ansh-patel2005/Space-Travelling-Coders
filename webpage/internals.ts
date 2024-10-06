@@ -9,7 +9,7 @@ export const fov: FOV = {
 
 export const exoplanet: Exoplanet = {
     position: [0, 0, 0],
-    radius: 6371
+    radius: 6371*3.24078e-14
 }
 
 // export const fov: FOV = {

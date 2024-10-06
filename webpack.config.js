@@ -6,7 +6,7 @@ const webpageConfig = {
     entry: "./webpage/main.ts",
     output: {
       path: path.resolve(__dirname, "webpage"),
-      filename: "compile.js"
+      filename: "compiled.js"
     },
     resolve: {
       extensions: [ ".ts", ".tsx", ".js", ".jsx" ]

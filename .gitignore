@@ -1,4 +1,4 @@
 node_modules
 package-lock.json
-webpage/compile.js
+webpage/compiled.js
 out

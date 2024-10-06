@@ -1,3 +1,4 @@
+import { Init } from "./comm"
 import { fov, stars, exoplanet} from "./internals"
 import { changeToLongAndLat, changeToCartesian } from "./math"
 import { computeStarProjections, FOVSize } from "./projections"
@@ -54,9 +55,6 @@ stars.push(new StarData(changeToCartesian(525.21*9.461e12, ...changeToLongAndLat
     "-60d29m31.1s"
 ))))
 
-computeStarProjections(fov, 6371, stars)
-
-Animate()
 function Animate() {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
@@ -64,7 +62,7 @@ function Animate() {
     ctx.fillStyle = "#000"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     
-    const fovSize = FOVSize(fov, 6371)
+    const fovSize = FOVSize(fov, exoplanet.radius)
     const maxDisplaySize = Math.min(canvas.width, canvas.height)
     const scaleFactor = maxDisplaySize/fovSize
 
@@ -107,3 +105,10 @@ function changeFOV(newFOV: string) {
     fov.fovReg = Number(newFOV)
     computeStarProjections(fov, exoplanet.radius, stars)
 }
+
+
+;(async () => {
+    await Init()
+    computeStarProjections(fov, exoplanet.radius, stars)
+    Animate()
+})()

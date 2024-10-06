@@ -9,5 +9,12 @@ The rest will be installed when you run `npm i` in this directory.
 `npm i`\
 `npx webpack`
 
+Run the server:\
+`tsc`\
+`cd out/server`\
+`node backend`
+
+Then goto `localhost:38712`
+
 Testing the code: 
 `npm run test` (creates an out folder)
