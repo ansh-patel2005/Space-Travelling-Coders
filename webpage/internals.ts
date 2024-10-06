@@ -1,10 +1,15 @@
 import { changeToLongAndLat, degToRad } from "./math"
-import { FOV, StarData } from "./types"
+import { FOV, StarData, Exoplanet } from "./types"
 
 export const fov: FOV = {
     latitude: degToRad(90-43),
     longitude: degToRad(-79),
     fovReg: Math.PI
+}
+
+export const exoplanet: Exoplanet = {
+    position: [0, 0, 0],
+    radius: 6371
 }
 
 // export const fov: FOV = {

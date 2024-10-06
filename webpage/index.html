@@ -8,5 +8,16 @@
 </head>
 <body style="margin: 0px;overflow: hidden;">
     <canvas style="width: 100vw;height: 100vh;margin: 0px;"></canvas>
+    <p>
+        Longitude:
+        <input type="range" id="Longitude" min="-180" max="180" value="0" oninput="changeLongitude(this.value)"/>
+        <output id="LongitudeOut">0</output>
+        Latitude:
+        <input type="range" id="Latitude" min="0" max="180" value="0" oninput="changeLatitude(this.value)"/>
+        <output id="LatitudeOut">0</output>
+        Field Of View (FOV):
+        <input type="range" id="FOV" min="0.001" max="180" value="90" oninput="changeFOV(this.value)"/>
+        <output id="FOVOut">90</output>
+    </p>
 </body>
 </html>

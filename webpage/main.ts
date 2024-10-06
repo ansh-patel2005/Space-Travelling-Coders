@@ -1,4 +1,4 @@
-import { fov, stars } from "./internals"
+import { fov, stars, exoplanet} from "./internals"
 import { changeToLongAndLat, changeToCartesian } from "./math"
 import { computeStarProjections, FOVSize } from "./projections"
 import { StarData } from "./types"
@@ -85,4 +85,25 @@ function Animate() {
     }
 
     requestAnimationFrame(() => {})
+}
+
+function changeLongitude(newLongitude: string){
+    let a = document.getElementById("LongitudeOut") as HTMLInputElement
+    a.value = newLongitude
+    fov.longitude = Number(newLongitude)
+    computeStarProjections(fov, exoplanet.radius, stars)
+}
+
+function changeLatitude(newLatitude: string){
+    let a = document.getElementById("LatitudeOut") as HTMLInputElement
+    a.value = newLatitude
+    fov.latitude = Number(newLatitude)
+    computeStarProjections(fov, exoplanet.radius, stars)
+}
+
+function changeFOV(newFOV: string) {
+    let a = document.getElementById("FOVOut") as HTMLInputElement
+    a.value = newFOV
+    fov.fovReg = Number(newFOV)
+    computeStarProjections(fov, exoplanet.radius, stars)
 }

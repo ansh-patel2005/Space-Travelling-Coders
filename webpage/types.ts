@@ -8,6 +8,7 @@ export interface FOV {
 
 export interface Exoplanet {
     position: Coordinate
+    radius: number
 }
 
 export class StarData {
