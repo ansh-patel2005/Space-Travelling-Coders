@@ -13,6 +13,7 @@ export interface Exoplanet {
 
 export class StarData {
     position: Coordinate
+    radius: number
 
     // Properties for drawing the star onto the display.
     screenX: number
@@ -20,8 +21,9 @@ export class StarData {
     screenRadius: number
     isVisible: boolean
 
-    constructor(position: Coordinate) {
+    constructor(position: Coordinate, radius: number) {
         this.position = position
+        this.radius = radius
 
         // These properties will be filled later when the setScreenPosition is called.
         this.screenX = 0

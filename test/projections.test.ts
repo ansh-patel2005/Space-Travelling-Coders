@@ -34,7 +34,7 @@ describe("computeStarProjections", () => {
                     "13h20m48.34s",
                     "-55d55m02.4s"
                 )
-            ))
+            ), 5e-8)
         ]
 
         computeStarProjections(fov, planetRadius, stars)

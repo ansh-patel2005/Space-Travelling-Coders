@@ -13,7 +13,7 @@ export async function Init() {
 
     for (const star of serverStarData) {
         stars.push(new StarData(
-            changeToCartesian(exoplanet.radius, ...changeToLongAndLat(star.ra, star.dec)),
+            changeToCartesian(exoplanet.radius, ...changeToLongAndLat(star.ra, star.dec)), 5e-8,
             // star.name
         ))
     }

@@ -156,8 +156,7 @@ export function computeStarProjections(fov: FOV, planetRadius: number, stars: St
         star.setScreenPosition(
             vectorDotProduct(planeCoord, xBasis),
             vectorDotProduct(planeCoord, yBasis),
-            20
-            // starSizeOnScreen(fov.angle, apparentSize(star.radius, Math.hypot(...star.position)), )
+            starSizeOnScreen(fov.angle, apparentSize(star.radius, Math.hypot(...star.position)), 1280)
         )
     }
 }
