@@ -1,12 +1,11 @@
 import { Exoplanet, FOV, Coordinate, StarData} from "./types"
-import { changeToCartesian, changeToSpherical, normalizeVector, parsecToKm, vectorCrossProduct, vectorDistance, vectorDotProduct } from "./math"
+import { changeToCartesian, changeToSpherical, normalizeVector, vectorCrossProduct, vectorDistance, vectorDotProduct } from "./math"
 import { starSizeOnScreen, apparentSize } from "./starmath"
 import { stars } from "./internals"
 
 // This only works when you start on Earth
-// TODO: use current position of planet (currPosition) and do star.position[i] -= (planet.position[i] - currPosition[i])
-function changePlanets(planet: Exoplanet) {
-    for (const star of stars) {
+export function changePlanets(planet: Exoplanet) {
+    for (const star of stars.values()) {
         for (let i = 0; i < 3; i++) {
             star.position[i] -= planet.position[i]
         }
@@ -117,11 +116,11 @@ export function findScreenBases(fov: FOV, planetRadius: number, tangentPlane: Pl
  * @param planetRadius 
  * @param stars 
  */
-export function computeStarProjections(fov: FOV, planetRadius: number, stars: StarData[]) {
+export function computeStarProjections(fov: FOV, planetRadius: number, stars: Map<string, StarData>) {
     const plane = computeTangentFOVPlane(fov, planetRadius)
     const [xBasis, yBasis] = findScreenBases(fov, planetRadius, plane)
 
-    for (const star of stars) {
+    for (const star of stars.values()) {
         // Project the star onto the surface of the planet.
         const [_, longitude, latitude] = changeToSpherical(...star.position)
         let starCoord = changeToCartesian(planetRadius, longitude, latitude)

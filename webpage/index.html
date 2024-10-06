@@ -23,8 +23,13 @@
 
         <div>
             Field Of View (FOV):
-            <input type="range" id="FOV" min="0.001" max="180" value="90" oninput="changeFOV(this.value)"/>
-            <output id="FOVOut">90</output>
+            <input type="range" id="FOV" min="1" max="180" value="180" oninput="changeFOV(this.value)"/>
+            <output id="FOVOut">180</output>
+        </div>
+
+        <div>
+            Exoplanet:
+            <select id="PlanetSelectMenu"></select>
         </div>
     </div>
 </body>

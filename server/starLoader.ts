@@ -2,6 +2,7 @@ import fs from "fs"
 import { parse } from "csv-parse"
 import { ServerPlanetData, ServerStarData } from "../shared/star"
 import { earthRadiusInParsecs, solarRadiusInParsecs } from "../shared/constants"
+import { exoplanet } from "../webpage/internals"
 
 /**
  * @todo optimize this fn
@@ -49,7 +50,7 @@ export async function loadStarData(csvPath: string): Promise<[ServerStarData[], 
 
         let headers: string[] | null = null
 
-        fs.createReadStream(csvPath)
+        fs.createReadStream(csvPath) 
             .pipe(csvParser)
             .on("data", data => {
                 if (headers == null) {

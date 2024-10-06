@@ -1,23 +1,18 @@
 import { ServerPlanetData } from "../shared/star"
-import { changeToLongAndLat, degToRad } from "./math"
 import { FOV, StarData, Exoplanet } from "./types"
 
 export const fov: FOV = {
-    latitude: degToRad(90-43),
-    longitude: degToRad(-79),
+    longitude: 0,
+    // for some reason at pi/2 nothing shows up. 
+    latitude: Math.PI/2 + 0.01,
     angle: Math.PI
 }
 
 export const exoplanet: Exoplanet = {
+    name: "Earth",
     position: [0, 0, 0],
     radius: 6371*3.24078e-14
 }
 
-// export const fov: FOV = {
-//     latitude: Math.PI,
-//     longitude: 0,
-//     angle: Math.PI/1.1
-// }
-
-export const stars: StarData[] = []
+export const stars: Map<string, StarData> = new Map()
 export const exoPlanets: ServerPlanetData[] = []

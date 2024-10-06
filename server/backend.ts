@@ -9,7 +9,7 @@ const jsFilePath = "../../webpage/compiled.js"
 const csvFilePath = "../../server/nasaSpaceCatalog.csv"
 
 ;(async () => {
-    const starData = JSON.stringify(await loadStarData(csvFilePath))
+    const starPlanetData = JSON.stringify(await loadStarData(csvFilePath))
 
     loadStarData(csvFilePath)
     
@@ -24,7 +24,7 @@ const csvFilePath = "../../server/nasaSpaceCatalog.csv"
             return
         } else if (req.url == "/data.json") {
             res.writeHead(200)
-            res.end(starData)
+            res.end(starPlanetData)
         } else {
             res.writeHead(404)
             res.end("Not found")

@@ -27,7 +27,8 @@ describe("computeStarProjections", () => {
             angle: Math.PI/2
         }
         const planetRadius = earthRadius
-        const stars = [
+        const stars = new Map([[
+            "star", 
             new StarData(changeToCartesian(
                 6153.89*9.461e12,
                 ...changeToLongAndLat(
@@ -35,7 +36,7 @@ describe("computeStarProjections", () => {
                     "-55d55m02.4s"
                 )
             ), 5e-8)
-        ]
+        ]])
 
         computeStarProjections(fov, planetRadius, stars)
 
@@ -48,9 +49,11 @@ describe("computeStarProjections", () => {
         )]
         expectedPosition[2] = 0 // drop z-component
 
+        const star = stars.values().next().value as StarData
+
         // Check it's the same as dropping the z-component of the star.
         assertCoordinateEquality(
-            [stars[0].screenX, stars[0].screenY, 0],
+            [star.screenX, star.screenY, 0],
             expectedPosition
         )
         

@@ -1,14 +1,15 @@
 export type Coordinate = [number, number, number]
 
 export interface FOV {
-    latitude: number
     longitude: number
+    latitude: number
     angle: number
 }
 
 export interface Exoplanet {
     position: Coordinate
     radius: number
+    name: string
 }
 
 export class StarData {
