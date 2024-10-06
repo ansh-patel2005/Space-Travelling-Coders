@@ -13,6 +13,7 @@
   },
   "scripts": {
     "test": "tsc && mocha './out/test/'",
-    "compile": "npx webpack && tsc"
+    "compile": "npx webpack && tsc",
+    "all": "npm i && npm run compile && cd out/server && node backend"
   }
 }
