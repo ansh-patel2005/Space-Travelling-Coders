@@ -25,4 +25,7 @@ Change to another exoplanet by selecting a planet in the planets select menu. No
 
 ![demo image](preview.png)
 
-**Note**: there appears to be a few bugs with the projections. Some stars and missing and some latitudes don't work.
+**Note**: there appears to be a few bugs with the projections. Some stars are missing and some latitudes don't work.
+
+## Credits
+Data from https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars 
