@@ -50,6 +50,13 @@ describe("changeToCartesian", () => {
             [0, 0, 1]
         )
     })
+
+    it("z=-1 on z-axis", () => {
+        assertCoordinateEquality(
+            changeToCartesian(1, 0, Math.PI),
+            [0, 0, -1]
+        )
+    })
 })
 
 describe("changeToSpherical", () => {

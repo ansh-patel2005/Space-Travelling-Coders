@@ -1,6 +1,6 @@
 import { fov, stars } from "./internals"
 import { changeToLongAndLat, changeToCartesian } from "./math"
-import { computeDisplayStars, FOVSize } from "./projections"
+import { computeStarProjections, FOVSize } from "./projections"
 import { StarData } from "./types"
 
 const canvas = document.querySelector("canvas") as HTMLCanvasElement
@@ -14,7 +14,7 @@ stars.push(new StarData(changeToCartesian(4.10438e15, ...changeToLongAndLat(
 ))))
 
 // Menkalinan
-stars.push(new StarData(changeToCartesian(7.683e12, ...changeToLongAndLat(
+stars.push(new StarData(changeToCartesian(768.3*1e12, ...changeToLongAndLat(
     "06h01m21.0s", "+44d56m51.9s"
 ))))
 
@@ -24,7 +24,37 @@ stars.push(new StarData(changeToCartesian(130.92*9.461e12, ...changeToLongAndLat
     "74d03m33.5s"
 ))))
 
-computeDisplayStars(fov, 6371)
+// errai
+stars.push(new StarData(changeToCartesian(424.6*1e12, ...changeToLongAndLat(
+    "23h40m25.8s",
+    "77d46m19.7s"
+))))
+
+// alpha centauri
+stars.push(new StarData(changeToCartesian(37.8*1e12, ...changeToLongAndLat(
+    "14h41m14.9s",
+    "-60d56m18.0s"
+))))
+
+// gamma centauri
+stars.push(new StarData(changeToCartesian(1.231*1e15, ...changeToLongAndLat(
+    "12h42m50.9s",
+    "-49d05m37.4s"
+))))
+
+// hip
+stars.push(new StarData(changeToCartesian(6153.89*9.461e12, ...changeToLongAndLat(
+    "13h20m48.34s",
+    "-55d55m02.4s"
+))))
+
+// hadar
+stars.push(new StarData(changeToCartesian(525.21*9.461e12, ...changeToLongAndLat(
+    "14h05m34.39s",
+    "-60d29m31.1s"
+))))
+
+computeStarProjections(fov, 6371, stars)
 
 Animate()
 function Animate() {
@@ -35,10 +65,14 @@ function Animate() {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     
     const fovSize = FOVSize(fov, 6371)
-    const maxDisplaySize = Math.max(canvas.width, canvas.height)
+    const maxDisplaySize = Math.min(canvas.width, canvas.height)
     const scaleFactor = maxDisplaySize/fovSize
 
     for (const star of stars) {
+        if (!star.isVisible) {
+            continue
+        }
+
         let {screenX, screenY} = star
         
         screenX = screenX*scaleFactor + canvas.width/2
