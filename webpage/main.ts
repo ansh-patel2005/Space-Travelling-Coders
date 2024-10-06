@@ -1,6 +1,6 @@
 import { Init } from "./comm"
 import { fov, stars, exoplanet} from "./internals"
-import { changeToLongAndLat, changeToCartesian } from "./math"
+import { changeToLongAndLat, changeToCartesian, degToRad } from "./math"
 import { computeStarProjections, FOVSize } from "./projections"
 import { StarData } from "./types"
 
@@ -55,6 +55,13 @@ stars.push(new StarData(changeToCartesian(525.21*9.461e12, ...changeToLongAndLat
     "-60d29m31.1s"
 ))))
 
+// hip 6798 - sao 129310
+stars.push(new StarData(changeToCartesian(1156.58*0.306601, ...changeToLongAndLat(
+    "01h28m42.23s",
+    "-07d12m58.4s"
+))))
+
+
 function Animate() {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
@@ -88,24 +95,32 @@ function Animate() {
 function changeLongitude(newLongitude: string){
     let a = document.getElementById("LongitudeOut") as HTMLInputElement
     a.value = newLongitude
-    fov.longitude = Number(newLongitude)
+    fov.longitude = degToRad(Number(newLongitude))
     computeStarProjections(fov, exoplanet.radius, stars)
+    Animate()
 }
+// @ts-ignore
+window.changeLongitude = changeLongitude
 
 function changeLatitude(newLatitude: string){
     let a = document.getElementById("LatitudeOut") as HTMLInputElement
     a.value = newLatitude
-    fov.latitude = Number(newLatitude)
+    fov.latitude = degToRad(90 - Number(newLatitude))
     computeStarProjections(fov, exoplanet.radius, stars)
+    Animate()
 }
+// @ts-ignore
+window.changeLatitude = changeLatitude
 
 function changeFOV(newFOV: string) {
     let a = document.getElementById("FOVOut") as HTMLInputElement
     a.value = newFOV
-    fov.fovReg = Number(newFOV)
+    fov.angle = degToRad(Number(newFOV))
     computeStarProjections(fov, exoplanet.radius, stars)
+    Animate()
 }
-
+// @ts-ignore
+window.changeFOV = changeFOV
 
 ;(async () => {
     await Init()

@@ -4,7 +4,7 @@ import { FOV, StarData, Exoplanet } from "./types"
 export const fov: FOV = {
     latitude: degToRad(90-43),
     longitude: degToRad(-79),
-    fovReg: Math.PI
+    angle: Math.PI
 }
 
 export const exoplanet: Exoplanet = {
@@ -15,7 +15,7 @@ export const exoplanet: Exoplanet = {
 // export const fov: FOV = {
 //     latitude: Math.PI,
 //     longitude: 0,
-//     fovReg: Math.PI/1.1
+//     angle: Math.PI/1.1
 // }
 
 export const stars: StarData[] = []

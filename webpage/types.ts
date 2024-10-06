@@ -3,7 +3,7 @@ export type Coordinate = [number, number, number]
 export interface FOV {
     latitude: number
     longitude: number
-    fovReg: number
+    angle: number
 }
 
 export interface Exoplanet {

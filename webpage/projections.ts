@@ -1,5 +1,6 @@
-import { Exoplanet, FOV, Coordinate, StarData } from "./types"
-import { changeToCartesian, changeToSpherical, normalizeVector, vectorCrossProduct, vectorDistance, vectorDotProduct } from "./math"
+import { Exoplanet, FOV, Coordinate, StarData} from "./types"
+import { changeToCartesian, changeToSpherical, normalizeVector, parsecToKm, vectorCrossProduct, vectorDistance, vectorDotProduct } from "./math"
+import { starSizeOnScreen, apparentSize } from "./starmath"
 import { stars } from "./internals"
 
 // This only works when you start on Earth
@@ -12,7 +13,7 @@ function changePlanets(planet: Exoplanet) {
     }
 }
 
-class Plane {
+export class Plane {
     /**
      * Normalized normal vector of the plane.
      */
@@ -28,25 +29,26 @@ class Plane {
     }
 
     /**
-     * Project a point onto this plane.
-     * @param point 
+     * Project a vector onto a plane.
+     * @param vec 
+     * @returns vector on the plane.
      */
-    project(point: Coordinate): Coordinate {
+    project(vec: Coordinate): Coordinate {
         // We don't need to divide by magnitude as normal is normalized
-        const coefficient = vectorDotProduct(point, this.normal)
+        const coefficient = vectorDotProduct(vec, this.normal)
 
         return [
-            point[0] - coefficient * this.normal[0],
-            point[1] - coefficient * this.normal[1],
-            point[2] - coefficient * this.normal[2],
+            vec[0] - coefficient * this.normal[0],
+            vec[1] - coefficient * this.normal[1],
+            vec[2] - coefficient * this.normal[2],
         ]
     }
 }
 
 export function FOVSize(fov: FOV, planetRadius: number) {
     // Latitude is never invariant like the longitude.
-    const p1 = changeToCartesian(planetRadius, fov.longitude, fov.latitude + fov.fovReg/2)
-    const p2 = changeToCartesian(planetRadius, fov.longitude, fov.latitude - fov.fovReg/2)
+    const p1 = changeToCartesian(planetRadius, fov.longitude, fov.latitude + fov.angle/2)
+    const p2 = changeToCartesian(planetRadius, fov.longitude, fov.latitude - fov.angle/2)
 
     return vectorDistance(p1, p2)
 }
@@ -87,12 +89,14 @@ export function computeTangentFOVPlane(fov: FOV, planetRadius: number) {
  * @param planetRadius 
  * @param tangentPlane 
  * @returns [xBasis, yBasis]
+ * 
+ * @note yBasis is the movement along the latitude parallel to the plane.
  */
 export function findScreenBases(fov: FOV, planetRadius: number, tangentPlane: Plane): [Coordinate, Coordinate] {
     // For turning the plane into the screen.
     // Calculate the yBasis.
     const fovCenter = changeToCartesian(planetRadius, fov.longitude, fov.latitude)
-    const yPosition = changeToCartesian(planetRadius, fov.longitude, fov.latitude + fov.fovReg / 2)
+    const yPosition = changeToCartesian(planetRadius, fov.longitude, fov.latitude + fov.angle / 2)
 
     // "basis for y" as projected onto the plane.
     let yBasis = tangentPlane.project([
@@ -142,15 +146,18 @@ export function computeStarProjections(fov: FOV, planetRadius: number, stars: St
         if (!isVisible) {
             continue
         }
-        
+
 
         // Split the star x, y, z into "components"
         // project star coordinates onto the x basis and the y basis 
+
+        console.log
 
         star.setScreenPosition(
             vectorDotProduct(planeCoord, xBasis),
             vectorDotProduct(planeCoord, yBasis),
             20
+            // starSizeOnScreen(fov.angle, apparentSize(star.radius, Math.hypot(...star.position)), )
         )
     }
 }

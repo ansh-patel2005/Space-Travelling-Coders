@@ -1,5 +1,8 @@
 import { Coordinate } from "./types"
 
+export const parsecToKm = 3.086e13
+export const earthRadius = 6371 / parsecToKm
+
 export function degToRad(deg: number) {
     return deg/180 * Math.PI
 }

@@ -10,7 +10,7 @@ The rest will be installed when you run `npm i` in this directory.
 `npx webpack`
 
 Run the server:\
-`tsc`\
+`npx tsc`\
 `cd out/server`\
 `node backend`
 

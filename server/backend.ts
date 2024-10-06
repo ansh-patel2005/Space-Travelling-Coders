@@ -8,10 +8,6 @@ const htmlFilePath = "../../webpage/index.html"
 const jsFilePath = "../../webpage/compiled.js"
 const csvFilePath = "../../server/nasaSpaceCatalog.csv"
 
-// Load all the files and server data.
-const htmlData = fs.readFileSync(htmlFilePath)
-const jsData = fs.readFileSync(jsFilePath)
-
 ;(async () => {
     const starData = JSON.stringify(await loadStarData(csvFilePath))
 
@@ -20,11 +16,11 @@ const jsData = fs.readFileSync(jsFilePath)
     const server = http.createServer((req, res) => {
         if (req.url == "/" || req.url == "/index.html") {
             res.writeHead(200)
-            res.end(htmlData)
+            res.end(fs.readFileSync(htmlFilePath))
             return
         } else if (req.url == "/compiled.js") {
             res.writeHead(200)
-            res.end(jsData)
+            res.end(fs.readFileSync(jsFilePath))
             return
         } else if (req.url == "/data.json") {
             res.writeHead(200)

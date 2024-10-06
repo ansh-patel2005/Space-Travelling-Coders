@@ -1,17 +1,7 @@
 import assert from "assert"
 import { describe, it } from "node:test"
 import { changeToCartesian, changeToLongAndLat, changeToSpherical, normalizeVector, vectorDistance, vectorDotProduct, vectorCrossProduct } from "../webpage/math"
-import { assetIsCloseEnough as assertIsCloseEnough } from "./helper"
-
-function assertCoordinateEquality(actual: number[], expected: number[]) {
-    const errMessage = `Got: [${actual.join(", ")}]. Expected: [${expected.join(", ")}]`
-
-    assert.equal(actual.length, expected.length, errMessage)
-
-    for (let i = 0; i < actual.length; i++) {
-        assertIsCloseEnough(actual[i], expected[i], undefined, errMessage)
-    }
-}
+import { assertIsCloseEnough, assertCoordinateEquality } from "./helper"
 
 describe("changeToLongAndLat", () => {
     it("zero edge case", () => {
