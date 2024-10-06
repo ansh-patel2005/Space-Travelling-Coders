@@ -1,3 +1,4 @@
+import { ServerPlanetData } from "../shared/star"
 import { changeToLongAndLat, degToRad } from "./math"
 import { FOV, StarData, Exoplanet } from "./types"
 
@@ -19,3 +20,4 @@ export const exoplanet: Exoplanet = {
 // }
 
 export const stars: StarData[] = []
+export const exoPlanets: ServerPlanetData[] = []

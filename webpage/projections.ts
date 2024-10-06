@@ -151,8 +151,7 @@ export function computeStarProjections(fov: FOV, planetRadius: number, stars: St
         // Split the star x, y, z into "components"
         // project star coordinates onto the x basis and the y basis 
 
-        console.log
-
+        // console.log("apparent size", apparentSize(star.radius, Math.hypot(...star.position)))
         star.setScreenPosition(
             vectorDotProduct(planeCoord, xBasis),
             vectorDotProduct(planeCoord, yBasis),

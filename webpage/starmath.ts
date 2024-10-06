@@ -1,5 +1,6 @@
 
 export function apparentSize(radiusStar: number, distanceFromPlanet: number): number{
+    // console.log("apparent size in fn", radiusStar, distanceFromPlanet, radiusStar/distanceFromPlanet)
     return 2*Math.atan(radiusStar/distanceFromPlanet)
 }
 
@@ -11,6 +12,7 @@ export function apparentSize(radiusStar: number, distanceFromPlanet: number): nu
  * @returns 
  */
 export function starSizeOnScreen(FOVSize: number, apparentSize: number, screenSize: number){
+    console.log("fov size", FOVSize)
     return (apparentSize/FOVSize * screenSize)/2
 }
 
