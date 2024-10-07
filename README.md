@@ -19,7 +19,7 @@ run the command `npm run all` in the terminal and then visit [`http://localhost:
 ## The program
 Upon loading in, you're previewing the night sky of Earth.
 
-Move around by changing the latitude, latitude and fov angle by dragging the slider.
+Move around by changing the longitude, latitude and fov angle by dragging the slider.
 
 Change to another exoplanet by selecting a planet in the planets select menu. Note: you can't come back to Earth after switching to an exoplanet.
 
